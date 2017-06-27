@@ -15,21 +15,24 @@
         <?php
     } else {
         foreach ($obligations as $obligation) {
-            ?>
-            <tr>
-                <td>
+            if (!$obligation->isComplete) {
+                ?>
+                <tr>
+                    <td>
                     <span class="click-text">
-                        <i id="more-info-<?php echo "$obligation->id"; ?>" class="text-icon material-icons">more_horiz</i>
+                        <i id="more-info-<?php echo "$obligation->id"; ?>"
+                           class="text-icon material-icons">more_horiz</i>
                         <?php echo $obligation->name; ?>
                         <span class="days-left-msg">
                              <?php echo $obligation->dueDate; ?>
                         </span>
                      </span>
-                    <i id="ob-start-<?php echo "$obligation->id-$obligation->name-$obligation->currentInterval"; ?>"
-                       class="task-button material-icons">play_arrow</i>
-                </td>
-            </tr>
-        <?php }
+                        <i id="ob-start-<?php echo "$obligation->id-$obligation->name-$obligation->currentInterval"; ?>"
+                           class="task-button material-icons">play_arrow</i>
+                    </td>
+                </tr>
+            <?php }
+        }
     }
     ?>
 </table>

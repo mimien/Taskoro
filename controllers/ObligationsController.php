@@ -25,6 +25,15 @@ class ObligationsController
         echo json_encode($obligationData);
     }
 
+
+    public function complete()
+    {
+        $oID = $_POST["oID"];
+
+        $obligationData = Obligation::complete($oID);
+        echo json_encode($obligationData);
+    }
+
     public function create()
     {
         if (session_status() == PHP_SESSION_NONE) {

@@ -13,11 +13,16 @@
         <a id="repeat-interval-btn" class="button">
             <i class="text-icon material-icons">repeat</i> Repeat interval
         </a>
-        <a  id="skip-interval-btn" class="button" href="#">
+        <a  id="skip-interval-btn" class="button">
             <i class="text-icon material-icons">skip_next</i> Skip interval
         </a>
         <br>
         <span id="current-interval"></span>
+        <br>
+
+        <a id="finish-task-btn" class="button">
+            <i class="text-icon material-icons">done</i> Complete task
+        </a>
     </div>
     <div id="tableContainer">
         <?php call('Obligations', 'table'); ?>

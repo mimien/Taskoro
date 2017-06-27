@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('*[id^="more-info"]').click(moreInfoTask);
     $("#repeat-interval-btn").click(repeatInterval);
     $("#skip-interval-btn").click(skipInterval);
+    $("#finish-task-btn").click(completeTask);
     modalFunctionality();
 });
 
@@ -121,7 +122,6 @@ function moreInfoTask() {
             $("#task-intervals").text(task.currentInterval);
             $("#task-date").text(task.dueDate);
             $("#information-modal").show();
-
         },
         error: function (errorMsg) {
             alert("go");
@@ -145,6 +145,32 @@ function incrementInterval() {
         success: function (update) {
             if (update.ok) {
                 alert("Task Interval updated on database");
+            }
+        },
+        error: function (errorMsg) {
+            $("html").html(errorMsg.responseText);
+        }
+    });
+}
+
+
+function completeTask() {
+    var jsonToSend = {
+        "controller": "Obligations",
+        "action": "complete",
+        "oID": "obligationID"
+    };
+
+    $.ajax({
+        url: "PostRoutes.php",
+        type: "POST",
+        data: jsonToSend,
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        success: function (query) {
+            if (query.ok) {
+                alert("You completed the task!");
+                location.reload();
             }
         },
         error: function (errorMsg) {

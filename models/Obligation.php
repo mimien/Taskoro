@@ -81,6 +81,14 @@ class Obligation
         }
         return $obligationData;
     }
-}
 
+    public static function complete($oID)
+    {
+        $db = Db::get();
+        $completeTask = "UPDATE Obligations SET isComplete = 1"
+            . " WHERE obligationId = $oID";
+        $operationOk = $db->query($completeTask);
+        return $operationOk;
+    }
+}
 ?>
