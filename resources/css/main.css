@@ -1,0 +1,337 @@
+:root {
+    --rg: #454F3E;
+    --cr: #FF4032;
+    --so: #ff5e5b;
+    --fw: #FFFAF4;
+    /*
+    var(--rg)
+    var(--cr)
+    var(--so)
+    var(--fw)
+    */
+}
+
+h1 {
+    font-family: Cambria;
+    font-weight: 800;
+    text-shadow: 1px 1px 1px rgba(69, 79, 62, .2);
+    text-align: center;
+    margin: 0;
+}
+
+h2 {
+    font-family: Cambria;
+    font-weight: 800;
+    text-shadow: 1px 1px 1px rgba(69, 79, 62, .2);
+    text-align: center;
+    margin: 0;
+}
+
+body {
+    background: var(--fw);
+    color: var(--rg);
+    font: 15px sans-serif;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+#main-content {
+    transition: margin-left .5s;
+    padding: 0 50px;
+}
+
+.form-field {
+    text-align: center;
+    margin: 0;
+}
+
+#slogan {
+    color: white;
+    font: bold italic 20px "Trebuchet MS";
+    margin: 0;
+    text-align: center;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
+    padding: 10px;
+}
+
+#logo {
+    height: 100px;
+    width: 100px;
+    margin: 4px auto;
+    display: block;
+}
+
+/*SIDE NAVIGATION*/
+
+.sidenav {
+    background: linear-gradient(to right, var(--cr), var(--so));
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    position: fixed;
+    top: 0;
+    transition: 0.5s;
+    width: 0;
+    z-index: 1;
+}
+
+.sidenav a {
+    color: white;
+    display: block;
+    font-size: 25px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidenav a:hover,
+.offcanvas a:focus {
+    color: #4BC65E;
+    text-shadow: 0px 0px 10px rgba(69, 79, 62, .4);
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#nav-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    float: left;
+    position: absolute;
+    font-size: 30px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+/*ELEMENTS*/
+
+label {
+    display: block;
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+fieldset {
+    border: 2px dashed #dddddd;
+    margin: 20px;
+}
+
+#user-fieldset {
+    padding: 10px 0;
+    margin: 20px auto;
+    border: 2px dashed #dddddd;
+    max-width: 400px;
+}
+
+legend {
+    font-family: courier;
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+input[type=text],
+input[type=password],
+textarea {
+    border: 1px outset rgba(69, 79, 62, .3);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 7px 10px;
+    min-width: 60px;
+}
+
+/*TABLE*/
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table-head {
+    font: bold 18px Cambria;
+    text-shadow: 1px 2px 5px rgba(69, 79, 62, .2);
+}
+
+table {
+    border-collapse: collapse;
+    box-shadow: 0px 0px 20px rgba(69, 79, 62, .2);
+    width: 100%;
+    padding: 1px 0;
+    margin: 30px 0;
+}
+
+th {
+    background-color: var(--cr);
+    color: var(--fw);
+    padding: 10px;
+    position: relative;
+}
+
+td {
+    background-color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/*INPUTS*/
+
+.button {
+    display: inline-block;
+    background-color: #4BC65E;
+    border: 1px outset rgba(69, 79, 62, .3);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(69, 79, 62, .5);
+    color: var(--fw);
+    margin: 10px 2px;
+    font-size: 16px;
+    padding: 7px 20px;
+    text-shadow: 1px 1px 0px rgba(69, 79, 62, .6);
+    text-decoration: none;
+}
+
+.button:hover {
+    transition: .5s;
+    background-color: #51Cc64;
+    cursor: pointer;
+}
+
+.button:active {
+    transition: .2s;
+    background-color: #39C35b;
+    box-shadow: 0px 2px 4px rgba(69, 79, 62, .4) inset;
+    cursor: pointer;
+}
+
+.task-button {
+    float: right;
+    text-shadow: 0px 0px 20px rgba(69, 79, 62, .2);
+    color: var(--so);
+    padding: 0 10px;
+}
+
+.task-button:hover {
+    transition: .5s;
+    color: var(--cr);
+    cursor: pointer;
+    text-shadow: 0px 0px 10px rgba(69, 79, 62, .4);
+}
+
+.new-task-button {
+    color: var(--fw);
+    position: absolute;
+    right: 15px;
+    text-shadow: 0px 0px 10px rgba(69, 79, 62, .2);
+}
+
+.new-task-button:hover {
+    transition: .5s;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0px 0px 10px rgba(69, 79, 62, .5);
+}
+
+.hidden {
+    display: none;
+}
+
+.days-left-msg {
+    color: #4BC65E;
+    margin: 0 5px;
+}
+
+.weeks-left-msg {
+    font-weight: bold;
+    color: #4BC65E;
+    margin: 0 5px;
+}
+
+.today-msg {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--so);
+    margin: 0 5px;
+}
+
+.nothing {
+    font: message-box;
+    font-weight: 300;
+    text-align: center;
+}
+
+.click-text {
+    display: inline-block;
+}
+
+.click-text:hover {
+    transition: .3s;
+    cursor: pointer;
+    text-shadow: 0 0 3px rgba(69, 79, 62, .3);
+}
+
+.text-icon {
+    float: left;
+    margin-right: 5px;
+}
+
+#task-bar {
+    text-align: center;
+    display: none;
+    margin: 0 auto;
+}
+
+/* The Modal (background) */
+#obligation-modal,
+#information-modal {
+    display: none; /* Hidden by default */
+}
+
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+#modal-content,
+#modal-info-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+#close-modal,
+#close-modal-info {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close-modal:hover, #close-modal-info:hover,
+#close-modal:focus, #close-modal-info:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
