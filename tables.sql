@@ -1,3 +1,5 @@
+--MYSQL TABLES
+
 CREATE TABLE Users (
    userID INT NOT NULL AUTO_INCREMENT,
    name VARCHAR(50) NOT NULL,
@@ -20,18 +22,6 @@ CREATE TABLE Tasks (
    FOREIGN KEY (projectID) REFERENCES Projects(projectID)
 );
 
-
-CREATE TABLE ProductiveTask (
-   productiveID INT NOT NULL AUTO_INCREMENT,
-   userID INT NOT NULL,
-   name VARCHAR(30) NOT NULL,
-   notes VARCHAR(255),
-   currentInterval INT NOT NULL,
-   totalIntervals INT NOT NULL,
-   PRIMARY KEY (productiveID),
-   FOREIGN KEY (userID) REFERENCES Users(userID)
-);
-
 CREATE TABLE Projects (
    projectID INT NOT NULL AUTO_INCREMENT,
    userID INT NOT NULL,
@@ -41,17 +31,3 @@ CREATE TABLE Projects (
    PRIMARY KEY (projectID),
    FOREIGN KEY (userID) REFERENCES Users(userID)
 );
-
-
-CREATE TABLE ProjectTasks (
-   pTaskID INT NOT NULL AUTO_INCREMENT,
-   projectID INT NOT NULL,
-   name VARCHAR(30) NOT NULL,
-   notes VARCHAR(255),
-   isComplete BOOL NOT NULL,
-   dueDate VARCHAR(50),
-   PRIMARY KEY (pTaskID),
-   FOREIGN KEY (projectID) REFERENCES Projects(projectID)
-);
-
-INSERT INTO Users(username, name, email, passwrd) VALUES('root','root','root','root');
