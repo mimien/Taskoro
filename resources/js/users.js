@@ -54,7 +54,7 @@ function login() {
             }
         },
         error: function (errorMsg) {
-            alert("esto");
+            alert("Bad connection");
             $("html").html(errorMsg.responseText);
         }
     });

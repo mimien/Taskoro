@@ -2,6 +2,7 @@
 
 class UsersController
 {
+
     // POST FUNCTIONS
     public function create()
     {
@@ -39,7 +40,7 @@ class UsersController
     // GET FUNCTIONS
     public function main()
     {
-            require_once('views/users/layout.php');
+        require_once('views/users/layout.php');
     }
 
     public function registerPage()
@@ -61,5 +62,3 @@ class UsersController
         echo 'Logged out';
     }
 }
-
-?>

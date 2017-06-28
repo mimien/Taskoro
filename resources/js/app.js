@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $("#new-obtask-btn").click(addObligatoryTask);
+    $("#new-task-btn").click(addTask);
+    $("#new-project-btn").click(addProject);
     $('*[id^="ob-start"]').click(StartObligatoryTask);
     $('*[id^="more-info"]').click(moreInfoTask);
     $("#repeat-interval-btn").click(repeatInterval);
@@ -15,7 +16,7 @@ var currentSeconds = 0;
 var currentMinutes = 0;
 var isLeisureTime = false;
 var currentInterval;
-var obligationID;
+var taskID;
 var obTaskName;
 
 function Decrement() {
@@ -31,14 +32,14 @@ function Decrement() {
             $("#skip-interval-btn").show();
             startAnotherInterval();
         } else if ((currentInterval % 4) === 0 && currentInterval > 0) {
-            incrementInterval(obligationID);
+            incrementInterval(taskID);
             currentInterval++;
             $("#repeat-interval-btn").hide();
             $("#skip-interval-btn").hide();
             startLeisureTime(20);
         }
         else {
-            incrementInterval(obligationID);
+            incrementInterval(taskID);
             currentInterval++;
             $("#repeat-interval-btn").hide();
             $("#skip-interval-btn").hide();
@@ -52,7 +53,7 @@ function Decrement() {
 
 function StartObligatoryTask() {
     var separateData = $(this).attr("id").split("-");
-    obligationID = separateData[2];
+    taskID = separateData[2];
     obTaskName = separateData[3];
     currentInterval = separateData[4];
 
@@ -88,12 +89,12 @@ function repeatInterval() {
 }
 
 function skipInterval() {
-    incrementInterval(obligationID);
+    incrementInterval(taskID);
     currentInterval++;
 
     isLeisureTime = true;
     $("#working-task").text("You are doing leisure time on " + obTaskName);
-    mins = ((currentInterval % 4) === 0 && currentInterval > 0)? 20 : 5;
+    mins = ((currentInterval % 4) === 0 && currentInterval > 0) ? 20 : 5;
     secs = mins * 60;
     currentSeconds = 0;
     currentMinutes = 0;
@@ -103,12 +104,12 @@ function skipInterval() {
 
 function moreInfoTask() {
     var jsonToSend = {
-        "controller": "Obligations",
+        "controller": "Tasks",
         "action": "showOne",
         "oID": $(this).attr("id").split("-")[2]
     };
 
-    $("#create-obligation-btn").click(function () {
+    $("#create-task-btn").click(function () {
     });
     $.ajax({
         url: "PostRoutes.php",
@@ -131,9 +132,9 @@ function moreInfoTask() {
 }
 function incrementInterval() {
     var jsonToSend = {
-        "controller": "Obligations",
+        "controller": "Tasks",
         "action": "updateInterval",
-        "oID": obligationID
+        "oID": taskID
     };
 
     $.ajax({
@@ -156,9 +157,9 @@ function incrementInterval() {
 
 function completeTask() {
     var jsonToSend = {
-        "controller": "Obligations",
+        "controller": "Tasks",
         "action": "complete",
-        "oID": "obligationID"
+        "taskID": taskID
     };
 
     $.ajax({
@@ -167,11 +168,9 @@ function completeTask() {
         data: jsonToSend,
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
-        success: function (query) {
-            if (query.ok) {
-                alert("You completed the task!");
-                location.reload();
-            }
+        success: function () {
+            alert("You completed the task!");
+            location.reload();
         },
         error: function (errorMsg) {
             $("html").html(errorMsg.responseText);
@@ -179,13 +178,14 @@ function completeTask() {
     });
 }
 
-function addObligatoryTask() {
+function addTask() {
     var jsonToSend = {
-        "controller": "Obligations",
+        "controller": "Tasks",
         "action": "create",
-        "name": $("#name-new-obtask").val(),
-        "notes": $("#notes-new-obtask").val(),
-        "date": $("#date-new-obtask").val()
+        "name": $("#name-new-task").val(),
+        "notes": $("#notes-new-task").val(),
+        "date": $("#date-new-task").val(),
+        "projectId": $("#project-id").val()
     };
 
     $.ajax({
@@ -198,7 +198,35 @@ function addObligatoryTask() {
             if (taskCreated.succesful) {
                 location.reload();
             } else {
-                alert("Llena los datos correctamente");
+                alert("Fill data correctly");
+            }
+        },
+        error: function (errorMsg) {
+            $("html").html(errorMsg.responseText);
+        }
+    });
+}
+
+function addProject() {
+    var jsonToSend = {
+        "controller": "Projects",
+        "action": "create",
+        "name": $("#name-new-project").val(),
+        "notes": $("#notes-new-project").val(),
+        "date": $("#date-new-project").val()
+    };
+
+    $.ajax({
+        url: "PostRoutes.php",
+        type: "POST",
+        data: jsonToSend,
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        success: function (projectCreated) {
+            if (projectCreated.succesful) {
+                location.reload();
+            } else {
+                alert("Fill data correctly");
             }
         },
         error: function (errorMsg) {
@@ -211,16 +239,30 @@ function addObligatoryTask() {
 // User interface functionality
 //
 function modalFunctionality() {
-    $("#close-modal").click(function () {
-        $("#obligation-modal").hide();
+    $('*[id^="new-task-project"]').click(function () {
+        $("#project-id").val($(this).attr("id").split("-")[3]);
+        $("#task-modal").show();
     });
 
-    $("#create-obligation-btn").click(function () {
-        $("#obligation-modal").show();
+    $("#close-modal").click(function () {
+        $("#project-id").val("-1");
+        $("#task-modal").hide();
+    });
+
+    $("#create-task-btn").click(function () {
+        $("#task-modal").show();
     });
 
     $("#close-modal-info").click(function () {
         $("#information-modal").hide();
+    });
+
+    $("#create-project-btn").click(function () {
+        $("#project-modal").show();
+    });
+
+    $("#close-modal-project").click(function () {
+        $("#project-modal").hide();
     });
 
 }

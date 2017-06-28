@@ -6,20 +6,22 @@ CREATE TABLE Users (
    PRIMARY KEY (userID)
 );
 
-CREATE TABLE Obligations (
-   obligationID INT NOT NULL AUTO_INCREMENT,
-   userID INT NOT NULL,
+CREATE TABLE Tasks (
+   taskID INT NOT NULL AUTO_INCREMENT,
+   userID INT,
+   projectID INT,
    name VARCHAR(30) NOT NULL,
    notes VARCHAR(255),
    currentInterval INT NOT NULL,
    dueDate VARCHAR(50) NOT NULL,
    isComplete BOOL NOT NULL,
-   PRIMARY KEY (obligationID),
-   FOREIGN KEY (userID) REFERENCES Users(userID)
+   PRIMARY KEY (taskID),
+   FOREIGN KEY (userID) REFERENCES Users(userID),
+   FOREIGN KEY (projectID) REFERENCES Projects(projectID)
 );
 
 
-CREATE TABLE Productive (
+CREATE TABLE ProductiveTask (
    productiveID INT NOT NULL AUTO_INCREMENT,
    userID INT NOT NULL,
    name VARCHAR(30) NOT NULL,

@@ -292,8 +292,10 @@ td {
 }
 
 /* The Modal (background) */
-#obligation-modal,
-#information-modal {
+#task-modal,
+#information-modal,
+#project-modal
+{
     display: none; /* Hidden by default */
 }
 
@@ -312,7 +314,8 @@ td {
 
 /* Modal Content */
 #modal-content,
-#modal-info-content {
+#info-content,
+#project-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -322,15 +325,17 @@ td {
 
 /* The Close Button */
 #close-modal,
-#close-modal-info {
+#close-modal-info,
+#close-modal-project {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-#close-modal:hover, #close-modal-info:hover,
-#close-modal:focus, #close-modal-info:focus {
+#close-modal:hover, #close-modal-project:hover,
+#close-modal:focus, #close-modal-project:focus,
+#close-modal-info:hover, #close-modal-info:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;

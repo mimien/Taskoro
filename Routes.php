@@ -15,6 +15,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
  */
 function call($controller, $action)
 {
+    global $pID;
+    echo $pID;
     require_once('controllers/' . $controller . 'Controller.php');
 
     // Creates a new instance of the needed controller
@@ -23,13 +25,17 @@ function call($controller, $action)
         case 'App':
             $controller = new AppController();
             break;
-        case 'Obligations':
-            require_once('models/Obligation.php');
-            $controller = new ObligationsController();
+        case 'Tasks':
+            require_once('models/Task.php');
+            $controller = new TasksController();
             break;
         case 'Users':
             require_once('models/User.php');
             $controller = new UsersController();
+            break;
+        case 'Projects':
+            require_once('models/Project.php');
+            $controller = new ProjectsController();
             break;
     }
 
@@ -39,8 +45,9 @@ function call($controller, $action)
 // A list of all available http get requests (controller) pointing to their posible actions
 $controllers = array(
     'App' => ['home', 'error404'],
-    'Obligations' => ['table', 'createPage', 'infoPage'],
-    'Users' => ['main', 'registerPage', 'loginPage', 'logout']
+    'Tasks' => ['table', 'createPage', 'infoPage', 'fromProject'],
+    'Users' => ['main', 'registerPage', 'loginPage', 'logout'],
+    'Projects' => ['createPage', 'all']
 );
 
 /* 

@@ -14,9 +14,13 @@ switch($controller) {
       require_once('models/User.php');
       $controller = new UsersController();
       break;
-   case 'Obligations':
-      require_once('models/Obligation.php');
-      $controller = new ObligationsController();
+   case 'Tasks':
+      require_once('models/Task.php');
+      $controller = new TasksController();
+      break;
+   case 'Projects':
+      require_once('models/Project.php');
+      $controller = new ProjectsController();
       break;
 }
 $controller->{$action}();

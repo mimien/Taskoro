@@ -1,6 +1,6 @@
 <?php
 
-class ObligationsController
+class TasksController
 {
 
     // POST FUNCTIONS
@@ -9,7 +9,7 @@ class ObligationsController
     {
         $oID = $_POST["oID"];
 
-        $operationOk = Obligation::updateInterval($oID);
+        $operationOk = Task::updateInterval($oID);
         if ($operationOk) {
             echo json_encode(array('ok' => True));
         } else {
@@ -21,16 +21,16 @@ class ObligationsController
     {
         $oID = $_POST["oID"];
 
-        $obligationData = Obligation::showOne($oID);
+        $obligationData = Task::showOne($oID);
         echo json_encode($obligationData);
     }
 
 
     public function complete()
     {
-        $oID = $_POST["oID"];
+        $oID = $_POST["taskID"];
 
-        $obligationData = Obligation::complete($oID);
+        $obligationData = Task::complete($oID);
         echo json_encode($obligationData);
     }
 
@@ -43,8 +43,13 @@ class ObligationsController
         $name = $_POST['name'];
         $notes = $_POST['notes'];
         $duedate = $_POST['date'];
+        $pID = $_POST['projectId'];
 
-        $operationOk = Obligation::add($uID, $name, $notes, $duedate);
+        if ($pID == -1) {
+            $operationOk = Task::add($uID, $name, $notes, $duedate);
+        } else {
+            $operationOk = Task::ofProjectAdd($pID, $name, $notes, $duedate);
+        }
         if ($operationOk) {
             echo json_encode(array('succesful' => True));
         } else {
@@ -59,12 +64,12 @@ class ObligationsController
     // GET FUNCTIONS
     public function createPage()
     {
-        require_once('views/obligations/create.php');
+        require_once('views/tasks/create.php');
     }
 
     public function infoPage()
     {
-        require_once('views/obligations/show.php');
+        require_once('views/tasks/show.php');
     }
 
     public function table()
@@ -72,9 +77,13 @@ class ObligationsController
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $obligations = Obligation::sFromUser($_SESSION['ID']);
-        require_once('views/obligations/table.php');
+        $tasks = Task::sFromUser($_SESSION['ID']);
+        require_once('views/tasks/table.php');
+    }
+
+    public static function fromProject($pID)
+    {
+        $tasks = Task::sFromProject($pID);
+        require_once('views/tasks/fromProject.php');
     }
 }
-
-?>
