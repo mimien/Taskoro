@@ -1,4 +1,5 @@
 # Taskoro
+Todo-list web app that manages tasks completion with support of the Pomodoro technique for time management.
 
 Php version 7.1.4
 
